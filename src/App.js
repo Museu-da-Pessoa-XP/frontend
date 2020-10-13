@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 
-import { TextField } from '@material-ui/core';
+import { TextField, Button } from '@material-ui/core';
 
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
@@ -14,13 +14,13 @@ export default () => {
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
   const [selectedType, setSelectedType] = useState(null);
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [media, setMedia] = useState(null);
 
-  const onFileChange = event => {
-    setSelectedFile(URL.createObjectURL(event.target.files[0]));
+  const onFileChange = (event) => {
+    setMedia(URL.createObjectURL(event.target.files[0]));
   };
 
-  const handleInput = setState => event => {
+  const handleInput = (setState) => (event) => {
     setState(event.target.value);
   };
 
@@ -65,22 +65,34 @@ export default () => {
         </ToggleButton>
       </ToggleButtonGroup>
 
-      <p>
-        {selectedType} {title} {description}{' '}
-      </p>
-
-      <input
-        type="file"
-        accept="image/*;capture=camera"
-        onChange={onFileChange}
-      />
-      {selectedFile && (
-        <img
-          className="App-selected-file"
-          src={selectedFile}
-          alt="Selected media by the user."
-        />
-      )}
+      {
+        selectedType === 'text' ? (
+          <TextField
+            multiline
+            rowsMax={10}
+            value={media}
+            onChange={handleInput(setMedia)}
+          />
+        ) : (
+          <Button
+            variant="contained"
+            component="label"
+          >
+            Selecionar o arquivo
+            <input
+              type="file"
+              accept={`${selectedType}/*`}
+              style={{ display: 'none' }}
+              onChange={onFileChange}
+            />
+          </Button>
+        )
+      }
+      <label htmlFor="contained-button-file">
+        <Button variant="contained" color="primary" component="span">
+          Enviar história
+        </Button>
+      </label>
     </div>
   );
 };
