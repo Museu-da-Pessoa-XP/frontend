@@ -11,9 +11,9 @@ import AudiotrackIcon from '@material-ui/icons/Audiotrack';
 import VideocamIcon from '@material-ui/icons/Videocam';
 
 export default () => {
-  const [title, setTitle] = useState(null);
-  const [description, setDescription] = useState(null);
-  const [selectedType, setSelectedType] = useState(null);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [selectedType, setSelectedType] = useState('text');
   const [media, setMedia] = useState(null);
 
   const onFileChange = (event) => {
@@ -46,20 +46,21 @@ export default () => {
 
       <h1>Escolha como você quer contar essa história:</h1>
       <ToggleButtonGroup
+        id="media-type-toggle"
         size="large"
         value={selectedType}
         exclusive
         onChange={handleToggle}
       >
-        <ToggleButton value="text">
+        <ToggleButton id="media-type-toggle-text" value="text">
           <TextFieldsIcon />
           Texto
         </ToggleButton>
-        <ToggleButton value="audio">
+        <ToggleButton id="media-type-toggle-audio" value="audio">
           <AudiotrackIcon />
           Áudio
         </ToggleButton>
-        <ToggleButton value="video">
+        <ToggleButton id="media-type-toggle-video" value="video">
           <VideocamIcon />
           Vídeo
         </ToggleButton>
@@ -68,6 +69,7 @@ export default () => {
       {
         selectedType === 'text' ? (
           <TextField
+            id="media-text-input"
             multiline
             rowsMax={10}
             value={media}
@@ -75,6 +77,7 @@ export default () => {
           />
         ) : (
           <Button
+            id="media-file-upload"
             variant="contained"
             component="label"
           >
@@ -88,11 +91,10 @@ export default () => {
           </Button>
         )
       }
-      <label htmlFor="contained-button-file">
-        <Button variant="contained" color="primary" component="span">
-          Enviar história
-        </Button>
-      </label>
+
+      <Button variant="contained" color="primary" component="span">
+        Enviar história
+      </Button>
     </div>
   );
 };
