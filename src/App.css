@@ -1,0 +1,24 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.App-media-buttons {
+  display: flex;
+}
+
+.App-selected-file {
+  max-width: 20em;
+  max-height: 20em;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
