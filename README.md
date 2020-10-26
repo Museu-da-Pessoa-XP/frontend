@@ -31,6 +31,9 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 3c017f232d33        frontend_frontend   "docker-entrypoint.s…"   3 days ago          Up 10 seconds       0.0.0.0:3000->3000/tcp   frontend_frontend_1
 ```
 
+## Access the appliction
+Open your web-browser (Chrome, Firefox, ...) on the address: <http://localhost:3000>
+
 ## Extras 
 
 It is suggested to edit and lint the code with VSCode running with the following extensions. 
