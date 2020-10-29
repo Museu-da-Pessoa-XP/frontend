@@ -13,19 +13,47 @@ import VideocamIcon from '@material-ui/icons/Videocam';
 export default () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [selectedType, setSelectedType] = useState('text');
-  const [media, setMedia] = useState(null);
+  const [type, setType] = useState('text');
+  const [media, setMedia] = useState('');
 
-  const onFileChange = (event) => {
+  function onFileChange(event) {
     setMedia(URL.createObjectURL(event.target.files[0]));
-  };
+  }
 
   const handleInput = (setState) => (event) => {
     setState(event.target.value);
   };
 
   const handleToggle = (event, newType) => {
-    setSelectedType(newType);
+    setType(newType);
+  };
+
+  const sendForm = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/historia/', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title,
+          description,
+          type,
+          media,
+        }),
+      });
+
+      if (response.status >= 200 && response.status < 300) {
+        console.log(response);
+        return response;
+      }
+      console.log('Something happened wrong');
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
   };
 
   return (
@@ -48,7 +76,7 @@ export default () => {
       <ToggleButtonGroup
         id="media-type-toggle"
         size="large"
-        value={selectedType}
+        value={type}
         exclusive
         onChange={handleToggle}
       >
@@ -67,7 +95,7 @@ export default () => {
       </ToggleButtonGroup>
 
       {
-        selectedType === 'text' ? (
+        type === 'text' ? (
           <TextField
             id="media-text-input"
             multiline
@@ -84,7 +112,7 @@ export default () => {
             Selecionar o arquivo
             <input
               type="file"
-              accept={`${selectedType}/*`}
+              accept={`${type}/*`}
               style={{ display: 'none' }}
               onChange={onFileChange}
             />
@@ -92,7 +120,7 @@ export default () => {
         )
       }
 
-      <Button variant="contained" color="primary" component="span">
+      <Button variant="contained" color="primary" component="span" onClick={sendForm}>
         Enviar história
       </Button>
     </div>
