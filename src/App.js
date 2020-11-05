@@ -30,18 +30,21 @@ export default () => {
 
   const sendForm = async () => {
     try {
+      const formData = new FormData();
+      const mediaFile = await fetch(media).then((r) => r.blob());
+
+      formData.append('title', title);
+      formData.append('description', description);
+      formData.append('type', type);
+      formData.append('media', mediaFile);
+
       const response = await fetch('http://localhost:8000/historia/', {
         method: 'POST',
         headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
+          // Accept: 'application/json',
+          // 'Content-type': 'multipart/form-data',
         },
-        body: JSON.stringify({
-          title,
-          description,
-          type,
-          media,
-        }),
+        body: formData,
       });
 
       if (response.status >= 200 && response.status < 300) {
