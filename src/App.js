@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import './App.css';
 
-import { TextField, Button, Grid, Snackbar } from '@material-ui/core';
+import {
+  TextField,
+  Button,
+  Grid,
+  Snackbar,
+  Typography
+} from '@material-ui/core';
 
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
@@ -88,7 +94,9 @@ export default () => {
           justify="center"
           alignItems="center"
         >
-          <h1>Escolha um título para sua história</h1>
+          <Typography variant="h6" component="h1">
+            Escolha um título para sua história
+          </Typography>
           <TextField
             id="title-input"
             value={title}
@@ -103,7 +111,9 @@ export default () => {
           justify="center"
           alignItems="center"
         >
-          <h1>Insira uma descrição como destaque para sua história</h1>
+          <Typography variant="h6" component="h1">
+            Insira uma descrição como destaque para sua história
+          </Typography>
           <TextField
             id="description-input"
             value={description}
@@ -119,7 +129,9 @@ export default () => {
           alignItems="center"
           style={{ minHeight: '30vh' }}
         >
-          <h1>Escolha como você quer contar essa história</h1>
+          <Typography variant="h6" component="h1">
+            Escolha como você quer contar essa história
+          </Typography>
           <ToggleButtonGroup
             id="media-type-toggle"
             size="large"
@@ -185,7 +197,9 @@ export default () => {
 
         <Snackbar
           open={alertState}
-          onClose={() => { setAlertState(false) }}
+          onClose={() => {
+            setAlertState(false);
+          }}
           message={alertMessage}
         />
       </Grid>
