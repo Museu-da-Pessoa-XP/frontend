@@ -5,14 +5,14 @@ import {
   Button,
   Grid,
   Snackbar,
-  Typography
+  Typography,
 } from '@material-ui/core';
 
 import MediaTypeSelector from './MediaTypeSelector';
 import MediaInput from './MediaInput';
 import SendFormButton from './SendFormButton';
 
-export default props => {
+export default (props) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [type, setType] = useState('text');
@@ -20,7 +20,7 @@ export default props => {
   const [alertState, setAlertState] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
 
-  const handleInput = setState => event => {
+  const handleInput = (setState) => (event) => {
     setState(event.target.value);
   };
 

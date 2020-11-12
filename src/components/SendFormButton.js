@@ -2,10 +2,11 @@ import React from 'react';
 import { Button, Snackbar } from '@material-ui/core';
 
 export default ({ inputData }) => {
-  const getBlobFromLocation = mediaLocation =>
-    fetch(mediaLocation).then(response => response.blob());
+  const getBlobFromLocation = (mediaLocation) =>
+    fetch(mediaLocation).then((response) => response.blob());
 
-  const getBlobFromText = mediaText => new Blob([mediaText], { type: 'text/plain' });
+  const getBlobFromText = (mediaText) =>
+    new Blob([mediaText], { type: 'text/plain' });
 
   const getBlob = async ({ media, type }) => {
     if (type === 'text') return getBlobFromText(media);
@@ -19,7 +20,7 @@ export default ({ inputData }) => {
       const media = await getBlob(inputData);
       const data = { ...inputData, media };
 
-      Object.keys(data).forEach(fieldName => {
+      Object.keys(data).forEach((fieldName) => {
         formData.append(fieldName, data[fieldName]);
       });
 

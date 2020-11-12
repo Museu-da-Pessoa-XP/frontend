@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button } from "@material-ui/core";
 
 export default ({ media, setMedia, type }) => {
-  const handleTextInput = event => {
+  const handleTextInput = (event) => {
     const textContent = event.target.value;
     setMedia(textContent);
   };
 
-  const handleFileInput = event => {
+  const handleFileInput = (event) => {
     const file = event.target.files[0];
     const url = URL.createObjectURL(file);
     setMedia(url);
@@ -30,11 +30,11 @@ export default ({ media, setMedia, type }) => {
       <input
         type="file"
         accept={`${type}/*`}
-        style={{ display: 'none' }}
+        style={{ display: "none" }}
         onChange={handleFileInput}
       />
     </Button>
   );
 
-  return <>{type === 'text' ? TextMediaInput : FileMediaInput}</>;
+  return <>{type === "text" ? TextMediaInput : FileMediaInput}</>;
 };
