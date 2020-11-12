@@ -6,41 +6,7 @@ import MediaTypeSelector from './MediaTypeSelector';
 import MediaInput from './MediaInput';
 import Logo from '../assets/logo.png';
 import Form from './Form';
-
-const getBlobFromLocation = (mediaLocation) =>
-  fetch(mediaLocation).then((response) => response.blob());
-
-const getBlobFromText = (mediaText) =>
-  new Blob([mediaText], { type: 'text/plain' });
-
-const getBlob = async ({ media, type }) => {
-  if (type === 'text') return getBlobFromText(media);
-  return getBlobFromLocation(media);
-};
-
-const getFormData = async (inputData) => {
-  const formData = new FormData();
-
-  const media = await getBlob(inputData);
-  const data = { ...inputData, media };
-
-  Object.keys(data).forEach((fieldName) => {
-    formData.append(fieldName, data[fieldName]);
-  });
-
-  return formData;
-};
-
-const sendForm = async (inputData) => {
-  const formData = await getFormData(inputData);
-
-  const response = await fetch('http://localhost:8000/historia/', {
-    method: 'POST',
-    body: formData,
-  });
-
-  return response;
-};
+import sendForm from './sendForm';
 
 function FormHistoria() {
   const [title, setTitle] = useState('');
@@ -69,7 +35,9 @@ function FormHistoria() {
   };
 
   return (
-    <Form onSubmit={(event) => {
+    <Form
+      id="historia-form"
+      onSubmit={(event) => {
       event.preventDefault();
       sendForm({ title, description, type, media })
         .then((response) => {
@@ -108,6 +76,7 @@ function FormHistoria() {
       <MediaInput media={media} setMedia={setMedia} type={type} />
 
       <Button
+        id="submit-button"
         type="submit"
         variant="contained"
         color="primary"
@@ -116,6 +85,7 @@ function FormHistoria() {
       </Button>
 
       <Snackbar
+        id="result-alert"
         open={alertState}
         onClose={() => {
           setAlertState(false);
