@@ -1,7 +1,8 @@
 import React from 'react';
-import { Button, Snackbar } from '@material-ui/core';
+import { Button } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
-export default ({ inputData }) => {
+function SendFormButton({ inputData }) {
   const getBlobFromLocation = (mediaLocation) =>
     fetch(mediaLocation).then((response) => response.blob());
 
@@ -37,7 +38,7 @@ export default ({ inputData }) => {
         // TODO: This should be set in FormHistoria
         // setAlertMessage('História enviada com sucesso!');
         // setAlertState(true);
-        console.log(response);
+        // console.log(response);
         return response;
       }
       // TODO: This should be set in FormHistoria
@@ -45,7 +46,7 @@ export default ({ inputData }) => {
       // console.log('Something happened wrong');
       return response;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return error;
     }
   };
@@ -60,4 +61,10 @@ export default ({ inputData }) => {
       Enviar história
     </Button>
   );
+}
+
+SendFormButton.propTypes = {
+  inputData: PropTypes.objectOf(PropTypes.object).isRequired,
 };
+
+export default SendFormButton;

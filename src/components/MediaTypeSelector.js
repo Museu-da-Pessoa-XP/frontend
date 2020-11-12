@@ -6,7 +6,9 @@ import TextFieldsIcon from '@material-ui/icons/TextFields';
 import AudiotrackIcon from '@material-ui/icons/Audiotrack';
 import VideocamIcon from '@material-ui/icons/Videocam';
 
-export default ({ type, handleToggle }) => {
+import PropTypes from 'prop-types';
+
+function MediaTypeSelector({ type, handleToggle }) {
   return (
     <ToggleButtonGroup
       id="media-type-toggle"
@@ -29,4 +31,11 @@ export default ({ type, handleToggle }) => {
       </ToggleButton>
     </ToggleButtonGroup>
   );
+}
+
+MediaTypeSelector.propTypes = {
+  type: PropTypes.string.isRequired,
+  handleToggle: PropTypes.func.isRequired,
 };
+
+export default MediaTypeSelector;

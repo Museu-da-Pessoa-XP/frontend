@@ -1,23 +1,20 @@
 import React, { useState } from 'react';
 
-import {
-  TextField,
-  Button,
-  Grid,
-  Snackbar,
-  Typography,
-} from '@material-ui/core';
+import { TextField, Grid, Snackbar, Typography } from '@material-ui/core';
 
 import MediaTypeSelector from './MediaTypeSelector';
 import MediaInput from './MediaInput';
 import SendFormButton from './SendFormButton';
 
-export default (props) => {
+import Logo from '../assets/logo.png';
+
+function FormHistoria() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [type, setType] = useState('text');
   const [media, setMedia] = useState('');
   const [alertState, setAlertState] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [alertMessage, setAlertMessage] = useState('');
 
   const handleInput = (setState) => (event) => {
@@ -38,7 +35,7 @@ export default (props) => {
       alignItems="center"
       style={{ minHeight: '70vh' }}
     >
-      <img alt="" src={require('../assets/logo.png')} />
+      <img alt="" src={Logo} />
 
       <Typography variant="h6" component="h1">
         Escolha um título para sua história
@@ -75,4 +72,6 @@ export default (props) => {
       />
     </Grid>
   );
-};
+}
+
+export default FormHistoria;

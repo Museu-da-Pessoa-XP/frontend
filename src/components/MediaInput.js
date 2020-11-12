@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { TextField, Button } from "@material-ui/core";
+import PropTypes from 'prop-types';
 
-export default ({ media, setMedia, type }) => {
+function MediaInput ({ media, setMedia, type }) {
   const handleTextInput = (event) => {
     const textContent = event.target.value;
     setMedia(textContent);
@@ -38,3 +39,11 @@ export default ({ media, setMedia, type }) => {
 
   return <>{type === "text" ? TextMediaInput : FileMediaInput}</>;
 };
+
+MediaInput.propTypes = {
+  media: PropTypes.string.isRequired,
+  setMedia: PropTypes.func.isRequired,
+  type: PropTypes.string.isRequired,
+}
+
+export default MediaInput;
