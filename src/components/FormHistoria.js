@@ -1,12 +1,46 @@
 import React, { useState } from 'react';
 
-import { TextField, Grid, Snackbar, Typography } from '@material-ui/core';
+import { TextField, Snackbar, Typography, Button } from '@material-ui/core';
 
 import MediaTypeSelector from './MediaTypeSelector';
 import MediaInput from './MediaInput';
-import SendFormButton from './SendFormButton';
-
 import Logo from '../assets/logo.png';
+import Form from './Form';
+
+const getBlobFromLocation = (mediaLocation) =>
+  fetch(mediaLocation).then((response) => response.blob());
+
+const getBlobFromText = (mediaText) =>
+  new Blob([mediaText], { type: 'text/plain' });
+
+const getBlob = async ({ media, type }) => {
+  if (type === 'text') return getBlobFromText(media);
+  return getBlobFromLocation(media);
+};
+
+const getFormData = async (inputData) => {
+  const formData = new FormData();
+
+  const media = await getBlob(inputData);
+  const data = { ...inputData, media };
+
+  Object.keys(data).forEach((fieldName) => {
+    formData.append(fieldName, data[fieldName]);
+  });
+
+  return formData;
+};
+
+const sendForm = async (inputData) => {
+  const formData = await getFormData(inputData);
+
+  const response = await fetch('http://localhost:8000/historia/', {
+    method: 'POST',
+    body: formData,
+  });
+
+  return response;
+};
 
 function FormHistoria() {
   const [title, setTitle] = useState('');
@@ -14,8 +48,11 @@ function FormHistoria() {
   const [type, setType] = useState('text');
   const [media, setMedia] = useState('');
   const [alertState, setAlertState] = useState(false);
-  // eslint-disable-next-line no-unused-vars
   const [alertMessage, setAlertMessage] = useState('');
+  const alertMessages = {
+    success: 'História enviada com sucesso!',
+    fail: 'Houve um erro ao enviar a história. :('
+  };
 
   const handleInput = (setState) => (event) => {
     setState(event.target.value);
@@ -23,17 +60,26 @@ function FormHistoria() {
 
   const handleToggle = (event, newType) => {
     setType(newType);
-    setMedia('a');
+    setMedia('');
+  };
+
+  const setAlert = (message) => {
+    setAlertMessage(message);
+    setAlertState(true);
   };
 
   return (
-    <Grid
-      container
-      spacing={2}
-      direction="column"
-      justify="space-around"
-      alignItems="center"
-      style={{ minHeight: '70vh' }}
+    <Form onSubmit={(event) => {
+      event.preventDefault();
+      sendForm({ title, description, type, media })
+        .then((response) => {
+          const message = response.ok
+            ? alertMessages.success
+            : alertMessages.fail;
+          setAlert(message);
+        })
+        .catch(() => setAlert(alertMessages.fail));
+    }}
     >
       <img alt="" src={Logo} />
 
@@ -58,19 +104,26 @@ function FormHistoria() {
       <Typography variant="h6" component="h1">
         Escolha como você quer contar essa história
       </Typography>
-      <MediaTypeSelector type={type} handleToggle={handleToggle} />
+      <MediaTypeSelector id="media-type-selector" type={type} handleToggle={handleToggle} />
       <MediaInput media={media} setMedia={setMedia} type={type} />
 
-      <SendFormButton inputData={{ title, description, type, media }} />
+      <Button
+        type="submit"
+        variant="contained"
+        color="primary"
+      >
+        Enviar história
+      </Button>
 
       <Snackbar
         open={alertState}
         onClose={() => {
           setAlertState(false);
         }}
+        autoHideDuration={6000}
         message={alertMessage}
       />
-    </Grid>
+    </Form>
   );
 }
 
