@@ -8,24 +8,24 @@ import VideocamIcon from '@material-ui/icons/Videocam';
 
 import PropTypes from 'prop-types';
 
-function MediaTypeSelector({ type, handleToggle }) {
+function SelectorMediaType({ type, handleToggle }) {
   return (
     <ToggleButtonGroup
-      id="media-type-toggle"
+      id="selector-media-type"
       size="large"
       value={type}
       exclusive
       onChange={handleToggle}
     >
-      <ToggleButton id="media-type-toggle-text" value="text">
+      <ToggleButton id="selector-media-type_text-button" value="text">
         <TextFieldsIcon />
         Texto
       </ToggleButton>
-      <ToggleButton id="media-type-toggle-audio" value="audio">
+      <ToggleButton id="selector-media-type_audio-button" value="audio">
         <AudiotrackIcon />
         Áudio
       </ToggleButton>
-      <ToggleButton id="media-type-toggle-video" value="video">
+      <ToggleButton id="selector-media-type_video-button" value="video">
         <VideocamIcon />
         Vídeo
       </ToggleButton>
@@ -33,9 +33,9 @@ function MediaTypeSelector({ type, handleToggle }) {
   );
 }
 
-MediaTypeSelector.propTypes = {
+SelectorMediaType.propTypes = {
   type: PropTypes.string.isRequired,
   handleToggle: PropTypes.func.isRequired,
 };
 
-export default MediaTypeSelector;
+export default SelectorMediaType;

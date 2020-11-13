@@ -3,7 +3,7 @@ import React from "react";
 import { TextField, Button } from "@material-ui/core";
 import PropTypes from 'prop-types';
 
-function MediaInput ({ media, setMedia, type }) {
+function InputMedia ({ media, setMedia, type }) {
   const handleTextInput = (event) => {
     const textContent = event.target.value;
     setMedia(textContent);
@@ -15,9 +15,9 @@ function MediaInput ({ media, setMedia, type }) {
     setMedia(url);
   };
 
-  const TextMediaInput = (
+  const InputTextMedia= (
     <TextField
-      id="media-text-input"
+      id="input-media_input-media-text"
       multiline
       rowsMax={10}
       value={media}
@@ -25,8 +25,8 @@ function MediaInput ({ media, setMedia, type }) {
     />
   );
 
-  const FileMediaInput = (
-    <Button id="media-file-upload" variant="contained" component="label">
+  const InputFileMedia = (
+    <Button id="input-media_upload-media-file" variant="contained" component="label">
       Selecionar o arquivo
       <input
         type="file"
@@ -37,13 +37,13 @@ function MediaInput ({ media, setMedia, type }) {
     </Button>
   );
 
-  return <>{type === "text" ? TextMediaInput : FileMediaInput}</>;
+  return <>{type === "text" ? InputTextMedia : InputFileMedia}</>;
 };
 
-MediaInput.propTypes = {
+InputMedia.propTypes = {
   media: PropTypes.string.isRequired,
   setMedia: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
 }
 
-export default MediaInput;
+export default InputMedia;

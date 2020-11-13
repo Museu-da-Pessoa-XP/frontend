@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 import { TextField, Snackbar, Typography, Button } from '@material-ui/core';
 
-import MediaTypeSelector from './MediaTypeSelector';
-import MediaInput from './MediaInput';
+import SelectorMediaType from './SelectorMediaType';
+import InputMedia from './InputMedia';
 import Logo from '../assets/logo.png';
 import Form from './Form';
 import sendForm from './sendForm';
@@ -36,7 +36,7 @@ function FormHistoria() {
 
   return (
     <Form
-      id="historia-form"
+      id="form-historia"
       onSubmit={(event) => {
       event.preventDefault();
       sendForm({ title, description, type, media })
@@ -55,7 +55,7 @@ function FormHistoria() {
         Escolha um título para sua história
       </Typography>
       <TextField
-        id="title-input"
+        id="form-historia_input-title"
         value={title}
         onChange={handleInput(setTitle)}
       />
@@ -64,7 +64,7 @@ function FormHistoria() {
         Insira uma descrição como destaque para sua história
       </Typography>
       <TextField
-        id="description-input"
+        id="form-historia_input-description"
         value={description}
         onChange={handleInput(setDescription)}
       />
@@ -72,11 +72,11 @@ function FormHistoria() {
       <Typography variant="h6" component="h1">
         Escolha como você quer contar essa história
       </Typography>
-      <MediaTypeSelector id="media-type-selector" type={type} handleToggle={handleToggle} />
-      <MediaInput media={media} setMedia={setMedia} type={type} />
+      <SelectorMediaType id="form-historia_selector-media-type" type={type} handleToggle={handleToggle} />
+      <InputMedia media={media} setMedia={setMedia} type={type} />
 
       <Button
-        id="submit-button"
+        id="form-historia_button-submit"
         type="submit"
         variant="contained"
         color="primary"
@@ -85,7 +85,7 @@ function FormHistoria() {
       </Button>
 
       <Snackbar
-        id="result-alert"
+        id="form-historia_alert-result"
         open={alertState}
         onClose={() => {
           setAlertState(false);

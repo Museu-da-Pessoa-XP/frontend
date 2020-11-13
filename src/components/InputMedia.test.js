@@ -1,13 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import MediaInput from './MediaInput';
+import InputMedia from './InputMedia';
 
-describe('MediaInput', () => {
+describe('InputMedia', () => {
     let wrapper;
 
     const selectType = (type) => {
-        wrapper = shallow(<MediaInput type={type} media="" setMedia={() => { }} />);
+        wrapper = shallow(<InputMedia type={type} media="" setMedia={() => { }} />);
     };
 
     describe('when text type is selected', () => {
@@ -16,11 +16,11 @@ describe('MediaInput', () => {
         });
 
         it('should render text field', () => {
-            expect(wrapper.exists('#media-text-input')).toBe(true);
+            expect(wrapper.exists('#input-media_input-media-text')).toBe(true);
         });
 
         it('should not render file upload', () => {
-            expect(wrapper.exists('#media-file-upload')).toBe(false);
+            expect(wrapper.exists('#input-media_upload-media-file')).toBe(false);
         });
     });
 
@@ -30,11 +30,11 @@ describe('MediaInput', () => {
         });
 
         it('should render file upload', () => {
-            expect(wrapper.exists('#media-file-upload')).toBe(true);
+            expect(wrapper.exists('#input-media_upload-media-file')).toBe(true);
         });
 
         it('should not render text field', () => {
-            expect(wrapper.exists('#media-text-input')).toBe(false);
+            expect(wrapper.exists('#input-media_input-media-text')).toBe(false);
         });
     });
 
@@ -44,11 +44,11 @@ describe('MediaInput', () => {
         });
 
         it('should render file upload', () => {
-            expect(wrapper.exists('#media-file-upload')).toBe(true);
+            expect(wrapper.exists('#input-media_upload-media-file')).toBe(true);
         });
 
         it('should not render text field', () => {
-            expect(wrapper.exists('#media-text-input')).toBe(false);
+            expect(wrapper.exists('#input-media_input-media-text')).toBe(false);
         });
     });
 });
