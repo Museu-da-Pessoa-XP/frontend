@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm start
+    environment:
+      NODE_ENV: development
+    ports:
+      - 9229:9229
+    command: ["node", "--inspect=0.0.0.0:9229", "index.js"]
+    volumes:
+     - .:/home/app/library
+     - /home/app/library/node_modules
+    networks:
+      - database-network   
+    stdin_open: true
+
+networks: 
+  database-network:
+    driver: bridge
