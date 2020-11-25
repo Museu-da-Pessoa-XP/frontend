@@ -7,7 +7,7 @@ import {
   Button,
   Select,
   MenuItem,
-  Box,
+  Box
 } from "@material-ui/core";
 
 import SelectorMediaType from "./SelectorMediaType";
@@ -45,8 +45,6 @@ function FormHistoria() {
     setAlertMessage(message);
     setAlertState(true);
   };
-
-  console.log(category);
 
   return (
     <Form
