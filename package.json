@@ -57,13 +57,16 @@
   },
   "husky": {
     "hooks": {
+      "post-merge": "npm ci",
+      "post-rebase": "npm install",
       "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
-    "./src/*.{js,jsx,ts,tsx}": [
+    "src/**/*.{js,jsx,ts,tsx}": [
       "npx prettier --write",
-      "./node_modules/.bin/eslint src/*.js --fix-dry-run"
+      "./node_modules/.bin/eslint . --fix",
+      "npm test"
     ]
   }
 }
