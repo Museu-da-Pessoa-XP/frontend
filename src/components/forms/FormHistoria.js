@@ -10,11 +10,11 @@ import {
   Box
 } from "@material-ui/core";
 
-import SelectorMediaType from "./SelectorMediaType";
-import InputMedia from "./InputMedia";
-import Logo from "../assets/logo.png";
+import SelectorMediaType from "../SelectorMediaType";
+import InputMedia from "../InputMedia";
+import Logo from "../../assets/logo.png";
 import Form from "./Form";
-import sendForm from "./sendForm";
+import sendForm from "../sendForm";
 
 function FormHistoria() {
   const [title, setTitle] = useState("");
