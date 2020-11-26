@@ -22,6 +22,8 @@ function InputMedia({ media, setMedia, type }) {
       id="input-media_input-media-text"
       multiline
       rowsMax={10}
+      variant="outlined"
+      margin="normal"
       value={media}
       onChange={handleTextInput}
     />
