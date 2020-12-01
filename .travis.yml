@@ -3,13 +3,16 @@ language: node_js
 node_js:
   - "12"
 
+install:
+  - npm install --no-color --no-progress
+
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 
 script:
-  - npm test
+  - npm run test
   - npm run build
 
 after_script:
