@@ -12,7 +12,7 @@ install:
   - npm install
 
 script:
-  - npm run test
+  - npm run test -- --coverage --watchAll
   - npm run build
 
 # Pipe the coverage data to Code Climate
