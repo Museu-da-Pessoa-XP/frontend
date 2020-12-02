@@ -12,10 +12,9 @@ install:
   - npm install
 
 script:
-  - npm run test -- --coverage --watchAll
+  - CI=true npm run test -- --coverage
   - npm run build
 
-# Pipe the coverage data to Code Climate
 after_script:
   - ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.frontend.json coverage/frontend/lcov.info # Format frontend coverage
   - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json # Sum both coverage parts into coverage/codeclimate.json
