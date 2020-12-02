@@ -3,6 +3,19 @@ language: node_js
 node_js:
   - "12"
 
+before_install:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+
+install:
+  - npm install
+
 script:
-    - npm test
-    - npm run build
+  - CI=true npm run test -- --coverage
+  - npm run build
+
+after_script:
+  - ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.frontend.json coverage/frontend/lcov.info # Format frontend coverage
+  - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json # Sum both coverage parts into coverage/codeclimate.json
+  - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./cc-test-reporter upload-coverage; fi # Upload coverage/codeclimate.json
