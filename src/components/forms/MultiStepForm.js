@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import {
   Box,
   Button,
+  Snackbar,
   Stepper,
   Step,
   StepLabel,
@@ -17,6 +18,8 @@ import FormPersonalData from './FormPersonalData';
 import FormSelectMediaType from './FormSelectMediaType';
 import FormInsertMedia from './FormInsertMedia';
 import FormAdditionalInformation from './FormAdditionalInformation';
+
+import sendForm from '../sendForm';
 
 function getSteps() {
   return [
@@ -32,6 +35,17 @@ export default function MultiStepForm() {
   const [activeStep, setActiveStep] = useState(0);
   const [data, setData] = useState({});
 
+  const [alertState, setAlertState] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
+  const alertMessages = {
+    success: 'História enviada com sucesso!',
+    fail: 'Houve um erro ao enviar a história. :(',
+  };
+  const setAlert = (message) => {
+    setAlertMessage(message);
+    setAlertState(true);
+  };
+
   const steps = getSteps();
 
   const handleNext = () => {
@@ -42,16 +56,21 @@ export default function MultiStepForm() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-
   const handleReset = () => {
     setActiveStep(0);
     setData({});
   };
 
-  const sendData = (childNewData) => (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    setData({ ...data, ...childNewData });
-    handleNext();
+    sendForm(data)
+      .then((response) => {
+        const message = response.ok
+          ? alertMessages.success
+          : alertMessages.fail;
+        setAlert(message);
+      })
+      .catch(() => setAlert(alertMessages.fail));
   };
 
   return (
@@ -72,9 +91,27 @@ export default function MultiStepForm() {
             <Typography className={classes.instructions}>
               Todas as etapas concluídas!
             </Typography>
+            <Button
+              id="form-historia_button-submit"
+              onClick={handleSubmit}
+              variant="contained"
+              color="primary"
+            >
+              Enviar história
+            </Button>
             <Button onClick={handleReset} className={classes.button}>
               Voltar ao início
             </Button>
+
+            <Snackbar
+              id="form-historia_alert-result"
+              open={alertState}
+              onClose={() => {
+                setAlertState(false);
+              }}
+              autoHideDuration={6000}
+              message={alertMessage}
+            />
           </div>
         ) : (
           <Form id="form-page">
