@@ -4,6 +4,8 @@
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/92746fd813506f4fcb89/test_coverage)](https://codeclimate.com/github/Museu-da-Pessoa-XP/frontend/test_coverage)
 
+[![Build Status](https://travis-ci.org/Museu-da-Pessoa-XP/frontend.svg?branch=develop)](https://travis-ci.org/Museu-da-Pessoa-XP/frontend)
+
 ## To install
 =======
 The Museu da Pessoa backend is part of the Museu da Pessoa project and is responsible for saving the users' data such as name, email, text, audio and video
