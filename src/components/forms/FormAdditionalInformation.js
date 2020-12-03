@@ -23,7 +23,10 @@ function FormAdditionalInformation({ data, setData }) {
         onChange={handleInput((title) => ({ title }))}
       />
 
-      <InputTags />
+      <InputTags
+        value={data.tags}
+        setValue={(tags) => setData({ ...data, tags })}
+      />
     </>
   );
 }

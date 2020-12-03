@@ -9,9 +9,7 @@ import Autocomplete, {
 
 const filter = createFilterOptions();
 
-function InputTags() {
-  const [value, setValue] = React.useState([]);
-
+function InputTags({ value, setValue }) {
   return (
     <Autocomplete
       multiple
@@ -31,7 +29,7 @@ function InputTags() {
         return filtered;
       }}
       getOptionLabel={(option) => option}
-      options={tags}
+      options={defaultTags}
       renderTags={(tagValue, getTagProps) =>
         tagValue.map((option, index) => (
           <Chip label={option} {...getTagProps({ index })} />
@@ -45,7 +43,7 @@ function InputTags() {
   );
 }
 
-const tags = [
+const defaultTags = [
   'amor',
   'felicidade',
   'escola',
