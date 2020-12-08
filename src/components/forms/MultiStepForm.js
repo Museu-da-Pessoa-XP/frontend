@@ -79,7 +79,7 @@ export default function MultiStepForm() {
         {steps.map((label) => {
           return (
             <Step key={label}>
-              <StepLabel>{label}</StepLabel>
+              <StepLabel />
             </Step>
           );
         })}
