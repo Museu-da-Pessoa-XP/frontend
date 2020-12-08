@@ -11,12 +11,12 @@ services:
     ports:
       - 3000:3000
     volumes:
-     - .:/home/app/library
-     - /home/app/library/node_modules
+      - .:/home/app/library
+      - /home/app/library/node_modules
     networks:
-      - database-network   
+      - database-network
     stdin_open: true
 
-networks: 
+networks:
   database-network:
     driver: bridge

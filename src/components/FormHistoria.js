@@ -15,9 +15,11 @@ function FormHistoria() {
   const [media, setMedia] = useState('');
   const [alertState, setAlertState] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
+  const [canSubmit, setCanSubmit] = useState(false);
+
   const alertMessages = {
     success: 'História enviada com sucesso!',
-    fail: 'Houve um erro ao enviar a história. :('
+    fail: 'Houve um erro ao enviar a história. :(',
   };
 
   const handleInput = (setState) => (event) => {
@@ -38,16 +40,19 @@ function FormHistoria() {
     <Form
       id="form-historia"
       onSubmit={(event) => {
-      event.preventDefault();
-      sendForm({ title, description, type, media })
-        .then((response) => {
-          const message = response.ok
-            ? alertMessages.success
-            : alertMessages.fail;
-          setAlert(message);
-        })
-        .catch(() => setAlert(alertMessages.fail));
-    }}
+        event.preventDefault();
+        if (canSubmit) {
+          setCanSubmit(false);
+          sendForm({ title, description, type, media })
+            .then((response) => {
+              const message = response.ok
+                ? alertMessages.success
+                : alertMessages.fail;
+              setAlert(message);
+            })
+            .catch(() => setAlert(alertMessages.fail));
+        }
+      }}
     >
       <img alt="" src={Logo} />
 
@@ -72,7 +77,11 @@ function FormHistoria() {
       <Typography variant="h6" component="h1">
         Escolha como você quer contar essa história
       </Typography>
-      <SelectorMediaType id="form-historia_selector-media-type" type={type} handleToggle={handleToggle} />
+      <SelectorMediaType
+        id="form-historia_selector-media-type"
+        type={type}
+        handleToggle={handleToggle}
+      />
       <InputMedia media={media} setMedia={setMedia} type={type} />
 
       <Button
@@ -80,6 +89,9 @@ function FormHistoria() {
         type="submit"
         variant="contained"
         color="primary"
+        onClick={() => {
+          setCanSubmit(true);
+        }}
       >
         Enviar história
       </Button>

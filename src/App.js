@@ -1,6 +1,6 @@
-import React from "react";
-import "./App.css";
-import FormHistoria from "./components/FormHistoria";
+import React from 'react';
+import './App.css';
+import FormHistoria from './components/FormHistoria';
 
 function App() {
   return (

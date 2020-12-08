@@ -1,9 +1,11 @@
-import React from "react";
+import React from 'react';
 
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-function InputMedia ({ media, setMedia, type }) {
+import VideoRecorder from 'react-video-recorder';
+
+function InputMedia({ media, setMedia, type }) {
   const handleTextInput = (event) => {
     const textContent = event.target.value;
     setMedia(textContent);
@@ -15,7 +17,7 @@ function InputMedia ({ media, setMedia, type }) {
     setMedia(url);
   };
 
-  const InputTextMedia= (
+  const InputTextMedia = (
     <TextField
       id="input-media_input-media-text"
       multiline
@@ -26,24 +28,41 @@ function InputMedia ({ media, setMedia, type }) {
   );
 
   const InputFileMedia = (
-    <Button id="input-media_upload-media-file" variant="contained" component="label">
-      Selecionar o arquivo
-      <input
-        type="file"
-        accept={`${type}/*`}
-        style={{ display: "none" }}
-        onChange={handleFileInput}
+    <>
+      <VideoRecorder
+        constraints={{
+          audio: true,
+          video: type === 'video',
+        }}
+        isOnInitially
+        onRecordingComplete={(videoBlob) => {
+          const url = URL.createObjectURL(videoBlob);
+          setMedia(url);
+        }}
       />
-    </Button>
+      <Button
+        id="input-media_upload-media-file"
+        variant="contained"
+        component="label"
+      >
+        Selecionar o arquivo
+        <input
+          type="file"
+          accept={`${type}/*`}
+          style={{ display: 'none' }}
+          onChange={handleFileInput}
+        />
+      </Button>
+    </>
   );
 
-  return <>{type === "text" ? InputTextMedia : InputFileMedia}</>;
-};
+  return <>{type === 'text' ? InputTextMedia : InputFileMedia}</>;
+}
 
 InputMedia.propTypes = {
   media: PropTypes.string.isRequired,
   setMedia: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
-}
+};
 
 export default InputMedia;
