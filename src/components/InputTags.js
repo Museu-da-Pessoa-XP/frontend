@@ -35,7 +35,6 @@ function InputTags({ value, setValue }) {
           <Chip label={option} {...getTagProps({ index })} />
         ))
       }
-      style={{ width: 500 }}
       renderInput={(params) => (
         <TextField {...params} variant="outlined" placeholder="Tags" />
       )}
