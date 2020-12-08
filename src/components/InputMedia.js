@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import { TextField, Button } from "@material-ui/core";
-import PropTypes from "prop-types";
+import { TextField, Button } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
-import VideoRecorder from "react-video-recorder";
+import VideoRecorder from 'react-video-recorder';
 
 function InputMedia({ media, setMedia, type }) {
   const handleTextInput = (event) => {
@@ -32,7 +32,7 @@ function InputMedia({ media, setMedia, type }) {
       <VideoRecorder
         constraints={{
           audio: true,
-          video: type === "video",
+          video: type === 'video',
         }}
         isOnInitially
         onRecordingComplete={(videoBlob) => {
@@ -49,14 +49,14 @@ function InputMedia({ media, setMedia, type }) {
         <input
           type="file"
           accept={`${type}/*`}
-          style={{ display: "none" }}
+          style={{ display: 'none' }}
           onChange={handleFileInput}
         />
       </Button>
     </>
   );
 
-  return <>{type === "text" ? InputTextMedia : InputFileMedia}</>;
+  return <>{type === 'text' ? InputTextMedia : InputFileMedia}</>;
 }
 
 InputMedia.propTypes = {

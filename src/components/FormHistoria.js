@@ -1,25 +1,25 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { TextField, Snackbar, Typography, Button } from "@material-ui/core";
+import { TextField, Snackbar, Typography, Button } from '@material-ui/core';
 
-import SelectorMediaType from "./SelectorMediaType";
-import InputMedia from "./InputMedia";
-import Logo from "../assets/logo.png";
-import Form from "./Form";
-import sendForm from "./sendForm";
+import SelectorMediaType from './SelectorMediaType';
+import InputMedia from './InputMedia';
+import Logo from '../assets/logo.png';
+import Form from './Form';
+import sendForm from './sendForm';
 
 function FormHistoria() {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [type, setType] = useState("text");
-  const [media, setMedia] = useState("");
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [type, setType] = useState('text');
+  const [media, setMedia] = useState('');
   const [alertState, setAlertState] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("");
+  const [alertMessage, setAlertMessage] = useState('');
   const [canSubmit, setCanSubmit] = useState(false);
 
   const alertMessages = {
-    success: "História enviada com sucesso!",
-    fail: "Houve um erro ao enviar a história. :(",
+    success: 'História enviada com sucesso!',
+    fail: 'Houve um erro ao enviar a história. :(',
   };
 
   const handleInput = (setState) => (event) => {
@@ -28,7 +28,7 @@ function FormHistoria() {
 
   const handleToggle = (event, newType) => {
     setType(newType);
-    setMedia("");
+    setMedia('');
   };
 
   const setAlert = (message) => {
