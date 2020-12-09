@@ -20,6 +20,7 @@ function FormAdditionalInformation({ data, setData }) {
         variant="outlined"
         margin="normal"
         value={data.title}
+        fullWidth
         onChange={handleInput((title) => ({ title }))}
       />
 

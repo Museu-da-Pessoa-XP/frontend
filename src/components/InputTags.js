@@ -14,6 +14,7 @@ function InputTags({ value, setValue }) {
     <Autocomplete
       multiple
       id="input-tags"
+      style={{ width: '100%' }}
       value={value}
       onChange={(event, newValue) => {
         setValue(newValue);

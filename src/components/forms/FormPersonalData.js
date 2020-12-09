@@ -25,6 +25,7 @@ function FormPersonalData({ data, setData }) {
         placeholder="Nome"
         variant="outlined"
         margin="normal"
+        fullWidth
         value={data.name}
         onChange={handleInput((name) => ({name}))}
       />
@@ -34,6 +35,7 @@ function FormPersonalData({ data, setData }) {
         placeholder="E-mail"
         variant="outlined"
         margin="normal"
+        fullWidth
         value={data.email}
         onChange={handleInput((email) => ({email}))}
       />
@@ -43,6 +45,7 @@ function FormPersonalData({ data, setData }) {
         placeholder="Telefone"
         variant="outlined"
         margin="normal"
+        fullWidth
         value={data.phone}
         onChange={handleInput((phone) => ({phone}))}
       />
