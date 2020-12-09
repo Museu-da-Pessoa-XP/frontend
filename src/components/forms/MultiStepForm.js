@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import {
   Box,
   Button,
+  Container,
   Snackbar,
   Stepper,
   Step,
@@ -74,11 +75,9 @@ export default function MultiStepForm() {
   };
 
   return (
-    <Box
-      className={classes.root}
-      display="flex"
-      flexDirection="column"
-      style={{ height: '100vh' }}
+    <Container
+      maxWidth="xs"
+      style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
     >
       <Stepper activeStep={activeStep}>
         {steps.map((label) => {
@@ -127,6 +126,7 @@ export default function MultiStepForm() {
           display="flex"
           justifyContent="space-around"
           style={{ width: '100%' }}
+          marginBottom={2}
         >
           {activeStep === 0 ? (
             ''
@@ -164,6 +164,6 @@ export default function MultiStepForm() {
           )}
         </Box>
       </>
-    </Box>
+    </Container>
   );
 }
