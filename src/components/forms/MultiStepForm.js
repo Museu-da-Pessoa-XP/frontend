@@ -128,15 +128,19 @@ export default function MultiStepForm() {
           justifyContent="space-around"
           style={{ width: '100%' }}
         >
-          <Button
-            id="form-select-media-type_button-submit"
-            onClick={handleBack}
-            variant="contained"
-            className={useStyles.button}
-            fullWidth
-          >
-            Voltar
-          </Button>
+          {activeStep === 0 ? (
+            ''
+          ) : (
+            <Button
+              id="form-select-media-type_button-submit"
+              onClick={handleBack}
+              variant="contained"
+              className={useStyles.button}
+              fullWidth
+            >
+              Voltar
+            </Button>
+          )}
           {activeStep === steps.length ? (
             <Button
               id="form-historia_button-submit"
