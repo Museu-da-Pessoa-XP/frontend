@@ -74,7 +74,12 @@ export default function MultiStepForm() {
   };
 
   return (
-    <div className={classes.root}>
+    <Box
+      className={classes.root}
+      display="flex"
+      flexDirection="column"
+      style={{ height: '100vh' }}
+    >
       <Stepper activeStep={activeStep}>
         {steps.map((label) => {
           return (
@@ -84,69 +89,81 @@ export default function MultiStepForm() {
           );
         })}
       </Stepper>
-      <div>
-        {activeStep === steps.length ? (
-          // TODO: preview do arquivo
-          <div>
-            <Typography className={classes.instructions}>
-              Todas as etapas concluídas!
-            </Typography>
+      {activeStep === steps.length ? (
+        // TODO: preview do arquivo
+        <Box flexGrow={1} m={4}>
+          <Typography className={classes.instructions}>
+            Todas as etapas concluídas!
+          </Typography>
+          
+          <Button
+            id="form-historia_button-submit"
+            onClick={handleSubmit}
+            variant="contained"
+            color="primary"
+          >
+            Enviar história
+          </Button>
+          <Button onClick={handleReset} className={classes.button}>
+            Voltar ao início
+          </Button>
+
+          <Snackbar
+            id="form-historia_alert-result"
+            open={alertState}
+            onClose={() => {
+              setAlertState(false);
+            }}
+            autoHideDuration={6000}
+            message={alertMessage}
+          />
+        </Box>
+      ) : (
+        <>
+          <Box
+            flexGrow={1}
+            m={4}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+          >
+            {
+              [
+                <FormPersonalData setData={setData} data={data} />,
+                <FormSelectMediaType setData={setData} data={data} />,
+                <FormInsertMedia setData={setData} data={data} />,
+                <FormAdditionalInformation setData={setData} data={data} />,
+              ][activeStep]
+            }
+          </Box>
+          <Box
+            display="flex"
+            justifyContent="space-around"
+            style={{ width: '100%' }}
+          >
             <Button
-              id="form-historia_button-submit"
-              onClick={handleSubmit}
+              id="form-select-media-type_button-submit"
+              onClick={handleBack}
+              variant="contained"
+              className={useStyles.button}
+              fullWidth
+            >
+              Voltar
+            </Button>
+
+            <Button
+              id="form-select-media-type_button-submit"
+              onClick={handleNext}
               variant="contained"
               color="primary"
+              fullWidth
             >
-              Enviar história
+              Continuar
             </Button>
-            <Button onClick={handleReset} className={classes.button}>
-              Voltar ao início
-            </Button>
-
-            <Snackbar
-              id="form-historia_alert-result"
-              open={alertState}
-              onClose={() => {
-                setAlertState(false);
-              }}
-              autoHideDuration={6000}
-              message={alertMessage}
-            />
-          </div>
-        ) : (
-          <Form id="form-page">
-            <Box m={4} display="flex" flexDirection="column">
-              {
-                [
-                  <FormPersonalData setData={setData} data={data} />,
-                  <FormSelectMediaType setData={setData} data={data} />,
-                  <FormInsertMedia setData={setData} data={data} />,
-                  <FormAdditionalInformation setData={setData} data={data} />,
-                ][activeStep]
-              }
-              <Box>
-                <Button
-                  id="form-select-media-type_button-submit"
-                  onClick={handleBack}
-                  variant="contained"
-                  className={useStyles.button}
-                >
-                  Voltar
-                </Button>
-
-                <Button
-                  id="form-select-media-type_button-submit"
-                  onClick={handleNext}
-                  variant="contained"
-                  color="primary"
-                >
-                  Continuar
-                </Button>
-              </Box>
-            </Box>
-          </Form>
-        )}
-      </div>
-    </div>
+          </Box>
+        </>
+      )}
+    </Box>
   );
 }
