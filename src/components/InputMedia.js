@@ -64,7 +64,7 @@ function InputMedia({ media, setMedia, type }) {
 InputMedia.propTypes = {
   media: PropTypes.string.isRequired,
   setMedia: PropTypes.func.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['text', 'audio', 'video']).isRequired,
 };
 
 export default InputMedia;

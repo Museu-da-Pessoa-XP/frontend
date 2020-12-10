@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-use-before-define */
 import React from 'react';
+import PropTypes from 'prop-types';
 import Chip from '@material-ui/core/Chip';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete, {
@@ -53,5 +54,10 @@ const defaultTags = [
   'amigos',
   'tristeza',
 ];
+
+InputTags.propTypes = {
+  value: PropTypes.arrayOf(PropTypes.string).isRequired,
+  setValue: PropTypes.func.isRequired
+};
 
 export default InputTags;
