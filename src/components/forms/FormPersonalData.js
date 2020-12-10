@@ -1,15 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
 import {
   TextField,
   Typography,
-  Button,
-  Box,
 } from "@material-ui/core";
 
 import Logo from "../../assets/logo.png";
-import Form from "./Form";
-
 
 function FormPersonalData({ data, setData }) {
   

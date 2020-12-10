@@ -1,168 +1,159 @@
-import React, { useState } from "react";
+// TODO: previsualizacao dos dados inseridos
+// TODO: campos de rg etc
 
+import React, { useState } from 'react';
 import {
-  TextField,
-  Snackbar,
-  Typography,
+  Box,
   Button,
-  Select,
-  MenuItem,
-  Box
-} from "@material-ui/core";
+  Snackbar,
+  Stepper,
+  Step,
+  StepLabel,
+  Typography,
+} from '@material-ui/core';
 
-import SelectorMediaType from "../SelectorMediaType";
-import InputMedia from "../InputMedia";
-import Logo from "../../assets/logo.png";
-import Form from "./Form";
-import sendForm from "../sendForm";
+import Form from './Form';
+import useStyles from '../styles/style';
+import FormPersonalData from './FormPersonalData';
+import FormSelectMediaType from './FormSelectMediaType';
+import FormInsertMedia from './FormInsertMedia';
+import FormAdditionalInformation from './FormAdditionalInformation';
 
-function FormHistoria() {
-  const [title, setTitle] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [category, setCategory] = useState("study");
-  const [description, setDescription] = useState("");
-  const [type, setType] = useState("text");
-  const [media, setMedia] = useState("");
+import sendForm from '../sendForm';
+
+function getSteps() {
+  return [
+    'Dados Pessoais',
+    'Como você quer contar sua história?',
+    'Conte sua história',
+    'Informações adicionais',
+  ];
+}
+
+export default function FormHistoria() {
+  const classes = useStyles();
+  const [activeStep, setActiveStep] = useState(0);
+  const [data, setData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    type: 'text',
+    media: '',
+    title: '',
+    tags: [],
+  });
+
   const [alertState, setAlertState] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("");
+  const [alertMessage, setAlertMessage] = useState('');
   const alertMessages = {
-    success: "História enviada com sucesso!",
-    fail: "Houve um erro ao enviar a história. :(",
+    success: 'História enviada com sucesso!',
+    fail: 'Houve um erro ao enviar a história. :(',
   };
-
-  const handleInput = (setState) => (event) => {
-    setState(event.target.value);
-  };
-
-  const handleToggle = (event, newType) => {
-    setType(newType);
-    setMedia("");
-  };
-
   const setAlert = (message) => {
     setAlertMessage(message);
     setAlertState(true);
   };
 
+  const steps = getSteps();
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleReset = () => {
+    setActiveStep(0);
+    setData({});
+  };
+
+  const handleSubmit = () => {
+    sendForm(data)
+      .then((response) => {
+        const message = response.ok
+          ? alertMessages.success
+          : alertMessages.fail;
+        setAlert(message);
+      })
+      .catch(() => setAlert(alertMessages.fail));
+  };
+
   return (
-    <Form
-      id="form-historia"
-      onSubmit={(event) => {
-        event.preventDefault();
-        sendForm({ title, description, type, media })
-          .then((response) => {
-            const message = response.ok
-              ? alertMessages.success
-              : alertMessages.fail;
-            setAlert(message);
-          })
-          .catch(() => setAlert(alertMessages.fail));
-      }}
-    >
-      <img alt="" src={Logo} />
+    <div className={classes.root}>
+      <Stepper activeStep={activeStep}>
+        {steps.map((label) => {
+          return (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          );
+        })}
+      </Stepper>
+      <div>
+        {activeStep === steps.length ? (
+          // TODO: preview do arquivo
+          <div>
+            <Typography className={classes.instructions}>
+              Todas as etapas concluídas!
+            </Typography>
+            <Button
+              id="form-historia_button-submit"
+              onClick={handleSubmit}
+              variant="contained"
+              color="primary"
+            >
+              Enviar história
+            </Button>
+            <Button onClick={handleReset} className={classes.button}>
+              Voltar ao início
+            </Button>
 
-      <Box m={4} display="flex" flexDirection="column">
-        <Typography variant="h6" component="h1">
-          Digite suas informações pessoais
-        </Typography>
-        <TextField
-          id="form-historia_input-name"
-          placeholder="Nome"
-          value={name}
-          onChange={handleInput(setName)}
-        />
+            <Snackbar
+              id="form-historia_alert-result"
+              open={alertState}
+              onClose={() => {
+                setAlertState(false);
+              }}
+              autoHideDuration={6000}
+              message={alertMessage}
+            />
+          </div>
+        ) : (
+          <Form id="form-page">
+            <Box m={4} display="flex" flexDirection="column">
+              {
+                [
+                  <FormPersonalData setData={setData} data={data} />,
+                  <FormSelectMediaType setData={setData} data={data} />,
+                  <FormInsertMedia setData={setData} data={data} />,
+                  <FormAdditionalInformation setData={setData} data={data} />,
+                ][activeStep]
+              }
+              <Box>
+                <Button
+                  id="form-select-media-type_button-submit"
+                  onClick={handleBack}
+                  variant="contained"
+                  className={useStyles.button}
+                >
+                  Voltar
+                </Button>
 
-        <TextField
-          id="form-historia_input-email"
-          placeholder="E-mail"
-          value={email}
-          onChange={handleInput(setEmail)}
-        />
-
-        <TextField
-          id="form-historia_input-telephone"
-          placeholder="Telefone"
-          value={phone}
-          onChange={handleInput(setPhone)}
-        />
-      </Box>
-
-      <Box
-        m={4}
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        style={{ minHeight: "70vh" }}
-        justifyContent="space-between"
-      >
-        <Typography variant="h6" component="h1">
-          Escolha um título para sua história
-        </Typography>
-        <TextField
-          id="form-historia_input-title"
-          value={title}
-          onChange={handleInput(setTitle)}
-        />
-
-        <Typography variant="h6" component="h1">
-          Escolha a categoria da história
-        </Typography>
-
-        <Select
-          id="form-historia_input-category"
-          value={category}
-          onChange={handleInput(setCategory)}
-        >
-          <MenuItem value={"study"}>Estudos</MenuItem>
-          <MenuItem value={"love"}>Amor</MenuItem>
-          <MenuItem value={"travel"}>Viagem</MenuItem>
-          <MenuItem value={"family"}>Família</MenuItem>
-          <MenuItem value={"happiness"}>Felicidade</MenuItem>
-          <MenuItem value={"others"}>Outros</MenuItem>
-        </Select>
-
-        <Typography variant="h6" component="h1">
-          Insira uma descrição como destaque para sua história
-        </Typography>
-        <TextField
-          id="form-historia_input-description"
-          value={description}
-          onChange={handleInput(setDescription)}
-        />
-
-        <Typography variant="h6" component="h1">
-          Escolha como você quer contar essa história
-        </Typography>
-        <SelectorMediaType
-          id="form-historia_selector-media-type"
-          type={type}
-          handleToggle={handleToggle}
-        />
-        <InputMedia media={media} setMedia={setMedia} type={type} />
-
-        <Button
-          id="form-historia_button-submit"
-          type="submit"
-          variant="contained"
-          color="primary"
-        >
-          Enviar história
-        </Button>
-      </Box>
-
-      <Snackbar
-        id="form-historia_alert-result"
-        open={alertState}
-        onClose={() => {
-          setAlertState(false);
-        }}
-        autoHideDuration={6000}
-        message={alertMessage}
-      />
-    </Form>
+                <Button
+                  id="form-historia_button-next"
+                  onClick={handleNext}
+                  variant="contained"
+                  color="primary"
+                >
+                  Continuar
+                </Button>
+              </Box>
+            </Box>
+          </Form>
+        )}
+      </div>
+    </div>
   );
 }
-
-export default FormHistoria;
