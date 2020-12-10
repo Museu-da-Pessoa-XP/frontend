@@ -13,7 +13,6 @@ import {
   Typography,
 } from '@material-ui/core';
 
-import Form from './Form';
 import useStyles from '../styles/style';
 import FormPersonalData from './FormPersonalData';
 import FormSelectMediaType from './FormSelectMediaType';
@@ -63,11 +62,6 @@ export default function MultiStepForm() {
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
-    setData({});
   };
 
   const handleSubmit = () => {

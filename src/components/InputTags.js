@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-curly-newline */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-use-before-define */
 import React from 'react';
@@ -57,7 +58,7 @@ const defaultTags = [
 
 InputTags.propTypes = {
   value: PropTypes.arrayOf(PropTypes.string).isRequired,
-  setValue: PropTypes.func.isRequired
+  setValue: PropTypes.func.isRequired,
 };
 
 export default InputTags;
