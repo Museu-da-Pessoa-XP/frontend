@@ -1,16 +1,12 @@
-import React from "react";
+import React from 'react';
 
-import {
-  TextField,
-  Typography,
-} from "@material-ui/core";
+import { TextField, Typography } from '@material-ui/core';
 
-import Logo from "../../assets/logo.png";
+import Logo from '../../assets/logo.png';
 
 function FormPersonalData({ data, setData }) {
-  
   const handleInput = (newInput) => (event) => {
-    setData({ ...data, ...newInput(event.target.value)});
+    setData({ ...data, ...newInput(event.target.value) });
   };
 
   return (
@@ -27,7 +23,7 @@ function FormPersonalData({ data, setData }) {
         margin="normal"
         fullWidth
         value={data.name}
-        onChange={handleInput((name) => ({name}))}
+        onChange={handleInput((name) => ({ name }))}
       />
 
       <TextField
@@ -37,7 +33,7 @@ function FormPersonalData({ data, setData }) {
         margin="normal"
         fullWidth
         value={data.email}
-        onChange={handleInput((email) => ({email}))}
+        onChange={handleInput((email) => ({ email }))}
       />
 
       <TextField
@@ -47,9 +43,8 @@ function FormPersonalData({ data, setData }) {
         margin="normal"
         fullWidth
         value={data.phone}
-        onChange={handleInput((phone) => ({phone}))}
+        onChange={handleInput((phone) => ({ phone }))}
       />
-
     </>
   );
 }
