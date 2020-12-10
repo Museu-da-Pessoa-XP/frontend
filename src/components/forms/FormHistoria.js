@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import {
   Box,
   Button,
+  Container,
   Snackbar,
   Stepper,
   Step,
@@ -30,7 +31,7 @@ function getSteps() {
   ];
 }
 
-export default function FormHistoria() {
+export default function MultiStepForm() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   const [data, setData] = useState({
@@ -81,79 +82,95 @@ export default function FormHistoria() {
   };
 
   return (
-    <div className={classes.root}>
+    <Container
+      maxWidth="xs"
+      style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
+    >
       <Stepper activeStep={activeStep}>
         {steps.map((label) => {
           return (
             <Step key={label}>
-              <StepLabel>{label}</StepLabel>
+              <StepLabel />
             </Step>
           );
         })}
       </Stepper>
-      <div>
-        {activeStep === steps.length ? (
-          // TODO: preview do arquivo
-          <div>
+
+      <Snackbar
+        id="form-historia_alert-result"
+        open={alertState}
+        onClose={() => {
+          setAlertState(false);
+        }}
+        autoHideDuration={6000}
+        message={alertMessage}
+      />
+
+      <>
+        <Box
+          flexGrow={1}
+          m={4}
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+        >
+          {activeStep === steps.length ? (
             <Typography className={classes.instructions}>
               Todas as etapas concluídas!
             </Typography>
+          ) : (
+            [
+              <FormPersonalData setData={setData} data={data} />,
+              <FormSelectMediaType setData={setData} data={data} />,
+              <FormInsertMedia setData={setData} data={data} />,
+              <FormAdditionalInformation setData={setData} data={data} />,
+            ][activeStep]
+          )}
+        </Box>
+
+        <Box
+          display="flex"
+          justifyContent="space-around"
+          style={{ width: '100%' }}
+          marginBottom={2}
+        >
+          {activeStep === 0 ? (
+            ''
+          ) : (
+            <Button
+              id="form-historia_button-back"
+              onClick={handleBack}
+              variant="contained"
+              className={useStyles.button}
+              fullWidth
+            >
+              Voltar
+            </Button>
+          )}
+          {activeStep === steps.length ? (
             <Button
               id="form-historia_button-submit"
               onClick={handleSubmit}
               variant="contained"
               color="primary"
+              fullWidth
             >
               Enviar história
             </Button>
-            <Button onClick={handleReset} className={classes.button}>
-              Voltar ao início
+          ) : (
+            <Button
+              id="form-historia_button-next"
+              onClick={handleNext}
+              variant="contained"
+              color="primary"
+              fullWidth
+            >
+              Continuar
             </Button>
-
-            <Snackbar
-              id="form-historia_alert-result"
-              open={alertState}
-              onClose={() => {
-                setAlertState(false);
-              }}
-              autoHideDuration={6000}
-              message={alertMessage}
-            />
-          </div>
-        ) : (
-          <Form id="form-page">
-            <Box m={4} display="flex" flexDirection="column">
-              {
-                [
-                  <FormPersonalData setData={setData} data={data} />,
-                  <FormSelectMediaType setData={setData} data={data} />,
-                  <FormInsertMedia setData={setData} data={data} />,
-                  <FormAdditionalInformation setData={setData} data={data} />,
-                ][activeStep]
-              }
-              <Box>
-                <Button
-                  id="form-select-media-type_button-submit"
-                  onClick={handleBack}
-                  variant="contained"
-                  className={useStyles.button}
-                >
-                  Voltar
-                </Button>
-
-                <Button
-                  id="form-historia_button-next"
-                  onClick={handleNext}
-                  variant="contained"
-                  color="primary"
-                >
-                  Continuar
-                </Button>
-              </Box>
-            </Box>
-          </Form>
-        )}
-      </div>
-    </div>
+          )}
+        </Box>
+      </>
+    </Container>
   );
 }

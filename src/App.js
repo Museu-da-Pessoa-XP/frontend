@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import MultiStepForm from "./components/forms/MultiStepForm";
+import FormHistoria from "./components/forms/FormHistoria";
 
 function App() {
   return (
     <div className="App">
-      <MultiStepForm />
+      <FormHistoria />
     </div>
   );
 }
