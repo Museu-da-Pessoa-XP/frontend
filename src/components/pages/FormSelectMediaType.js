@@ -1,10 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 import { Typography } from '@material-ui/core';
 
 import SelectorMediaType from '../SelectorMediaType';
-
 
 function FormSelectMediaType({ data, setData }) {
   const handleToggle = (event, type) => {
@@ -27,9 +26,9 @@ function FormSelectMediaType({ data, setData }) {
 
 FormSelectMediaType.propTypes = {
   data: PropTypes.shape({
-    type: PropTypes.oneOf(['text', 'audio', 'video']).isRequired
+    type: PropTypes.oneOf(['text', 'audio', 'video']).isRequired,
   }).isRequired,
-  setData: PropTypes.func.isRequired
-}
+  setData: PropTypes.func.isRequired,
+};
 
 export default FormSelectMediaType;

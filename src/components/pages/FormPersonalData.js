@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 import { TextField, Typography } from '@material-ui/core';
 
@@ -54,9 +54,9 @@ FormPersonalData.propTypes = {
   data: PropTypes.shape({
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
-    phone: PropTypes.string.isRequired
+    phone: PropTypes.string.isRequired,
   }).isRequired,
-  setData: PropTypes.func.isRequired
-}
+  setData: PropTypes.func.isRequired,
+};
 
 export default FormPersonalData;

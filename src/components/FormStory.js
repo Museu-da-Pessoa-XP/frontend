@@ -16,12 +16,12 @@ import {
   Typography,
 } from '@material-ui/core';
 
-import FormPersonalData from './FormPersonalData';
-import FormSelectMediaType from './FormSelectMediaType';
-import FormInsertMedia from './FormInsertMedia';
-import FormAdditionalInformation from './FormAdditionalInformation';
+import FormPersonalData from './pages/FormPersonalData';
+import FormSelectMediaType from './pages/FormSelectMediaType';
+import FormInsertMedia from './pages/FormInsertMedia';
+import FormAdditionalInformation from './pages/FormAdditionalInformation';
 
-import sendForm from '../sendForm';
+import sendForm from './sendForm';
 
 export default function FormStory() {
   const [activeStep, setActiveStep] = useState(0);

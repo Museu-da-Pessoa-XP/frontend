@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import FormStory from './components/forms/FormStory';
+import FormStory from './components/FormStory';
 
 function App() {
   return (

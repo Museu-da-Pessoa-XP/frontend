@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 import { Typography } from '@material-ui/core';
 
@@ -28,9 +28,9 @@ function FormInsertMedia({ data, setData }) {
 FormInsertMedia.propTypes = {
   data: PropTypes.shape({
     type: PropTypes.oneOf(['text', 'audio', 'video']).isRequired,
-    media: PropTypes.string.isRequired
+    media: PropTypes.string.isRequired,
   }).isRequired,
-  setData: PropTypes.func.isRequired
-}
+  setData: PropTypes.func.isRequired,
+};
 
 export default FormInsertMedia;
