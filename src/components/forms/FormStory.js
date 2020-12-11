@@ -23,7 +23,7 @@ import FormAdditionalInformation from './FormAdditionalInformation';
 
 import sendForm from '../sendForm';
 
-export default function MultiStepForm() {
+export default function FormStory() {
   const [activeStep, setActiveStep] = useState(0);
   const [data, setData] = useState({
     name: '',

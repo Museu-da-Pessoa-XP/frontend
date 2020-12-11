@@ -1,13 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import FormHistoria from './FormHistoria';
+import FormStory from './FormStory';
 
-describe('FormHistoria', () => {
+describe('FormStory', () => {
   let wrapper;
 
   beforeEach(() => {
     fetch.resetMocks();
-    wrapper = shallow(<FormHistoria />);
+    wrapper = shallow(<FormStory />);
   });
 
   describe('when it starts', () => {});

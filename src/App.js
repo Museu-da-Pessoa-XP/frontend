@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import FormHistoria from './components/forms/FormHistoria';
+import FormStory from './components/forms/FormStory';
 
 function App() {
   return (
     <div className="App">
-      <FormHistoria />
+      <FormStory />
     </div>
   );
 }
