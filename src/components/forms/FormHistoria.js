@@ -1,7 +1,10 @@
+/* eslint-disable react/jsx-props-no-spreading */
 // TODO: previsualizacao dos dados inseridos
 // TODO: campos de rg etc
 
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
 import {
   Box,
   Button,
@@ -20,15 +23,6 @@ import FormInsertMedia from './FormInsertMedia';
 import FormAdditionalInformation from './FormAdditionalInformation';
 
 import sendForm from '../sendForm';
-
-function getSteps() {
-  return [
-    'Dados Pessoais',
-    'Como você quer contar sua história?',
-    'Conte sua história',
-    'Informações adicionais',
-  ];
-}
 
 export default function MultiStepForm() {
   const classes = useStyles();
@@ -54,8 +48,6 @@ export default function MultiStepForm() {
     setAlertState(true);
   };
 
-  const steps = getSteps();
-
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -75,20 +67,105 @@ export default function MultiStepForm() {
       .catch(() => setAlert(alertMessages.fail));
   };
 
+  const defaultPropsPage = { setData, data };
+  const pages = [
+    <FormPersonalData {...defaultPropsPage} />,
+    <FormSelectMediaType {...defaultPropsPage} />,
+    <FormInsertMedia {...defaultPropsPage} />,
+    <FormAdditionalInformation {...defaultPropsPage} />,
+  ];
+
+  const lastPage = (
+    <Typography className={classes.instructions}>
+      Todas as etapas concluídas!
+    </Typography>
+  );
+
+  const PageBox = ({ children }) => (
+    <Box
+      flexGrow={1}
+      m={4}
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+    >
+      {children}
+    </Box>
+  );
+  PageBox.propTypes = {
+    children: PropTypes.node.isRequired,
+  };
+
+  const ButtonBox = ({ children }) => (
+    <Box
+      display="flex"
+      justifyContent="space-around"
+      style={{ width: '100%' }}
+      marginBottom={2}
+    >
+      {children}
+    </Box>
+  );
+  ButtonBox.propTypes = {
+    children: PropTypes.node.isRequired,
+  };
+
+  const buttonBack = (
+    <Button
+      id="form-historia_button-back"
+      onClick={handleBack}
+      variant="contained"
+      className={useStyles.button}
+      fullWidth
+    >
+      Voltar
+    </Button>
+  );
+  const buttonNext = (
+    <Button
+      id="form-historia_button-next"
+      onClick={handleNext}
+      variant="contained"
+      color="primary"
+      fullWidth
+    >
+      Continuar
+    </Button>
+  );
+  const buttonSubmit = (
+    <Button
+      id="form-historia_button-submit"
+      onClick={handleSubmit}
+      variant="contained"
+      color="primary"
+      fullWidth
+    >
+      Enviar história
+    </Button>
+  );
+
   return (
     <Container
       maxWidth="xs"
       style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
     >
       <Stepper activeStep={activeStep}>
-        {steps.map((label) => {
-          return (
-            <Step key={label}>
-              <StepLabel />
-            </Step>
-          );
-        })}
+        {pages.map((page) => (
+          <Step key={page}>
+            <StepLabel />
+          </Step>
+        ))}
       </Stepper>
+
+      <PageBox>
+        {activeStep === pages.length ? lastPage : pages[activeStep]}
+      </PageBox>
+
+      <ButtonBox>
+        {activeStep !== 0 && buttonBack}
+        {activeStep === pages.length ? buttonSubmit : buttonNext}
+      </ButtonBox>
 
       <Snackbar
         id="form-historia_alert-result"
@@ -99,72 +176,6 @@ export default function MultiStepForm() {
         autoHideDuration={6000}
         message={alertMessage}
       />
-
-      <>
-        <Box
-          flexGrow={1}
-          m={4}
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-        >
-          {activeStep === steps.length ? (
-            <Typography className={classes.instructions}>
-              Todas as etapas concluídas!
-            </Typography>
-          ) : (
-            [
-              <FormPersonalData setData={setData} data={data} />,
-              <FormSelectMediaType setData={setData} data={data} />,
-              <FormInsertMedia setData={setData} data={data} />,
-              <FormAdditionalInformation setData={setData} data={data} />,
-            ][activeStep]
-          )}
-        </Box>
-
-        <Box
-          display="flex"
-          justifyContent="space-around"
-          style={{ width: '100%' }}
-          marginBottom={2}
-        >
-          {activeStep === 0 ? (
-            ''
-          ) : (
-            <Button
-              id="form-historia_button-back"
-              onClick={handleBack}
-              variant="contained"
-              className={useStyles.button}
-              fullWidth
-            >
-              Voltar
-            </Button>
-          )}
-          {activeStep === steps.length ? (
-            <Button
-              id="form-historia_button-submit"
-              onClick={handleSubmit}
-              variant="contained"
-              color="primary"
-              fullWidth
-            >
-              Enviar história
-            </Button>
-          ) : (
-            <Button
-              id="form-historia_button-next"
-              onClick={handleNext}
-              variant="contained"
-              color="primary"
-              fullWidth
-            >
-              Continuar
-            </Button>
-          )}
-        </Box>
-      </>
     </Container>
   );
 }
