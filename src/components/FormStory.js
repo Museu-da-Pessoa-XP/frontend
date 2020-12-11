@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
-// TODO: previsualizacao dos dados inseridos
-// TODO: campos de rg etc
+// TODO: pré visualização dos dados inseridos
+// TODO: adicionar redirect para forms
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
