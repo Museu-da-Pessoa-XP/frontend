@@ -16,7 +16,6 @@ import {
   Typography,
 } from '@material-ui/core';
 
-import useStyles from '../styles/style';
 import FormPersonalData from './FormPersonalData';
 import FormSelectMediaType from './FormSelectMediaType';
 import FormInsertMedia from './FormInsertMedia';
@@ -25,7 +24,6 @@ import FormAdditionalInformation from './FormAdditionalInformation';
 import sendForm from '../sendForm';
 
 export default function MultiStepForm() {
-  const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   const [data, setData] = useState({
     name: '',
@@ -75,11 +73,7 @@ export default function MultiStepForm() {
     <FormAdditionalInformation {...defaultPropsPage} />,
   ];
 
-  const lastPage = (
-    <Typography className={classes.instructions}>
-      Todas as etapas concluídas!
-    </Typography>
-  );
+  const lastPage = <Typography>Todas as etapas concluídas!</Typography>;
 
   const PageBox = ({ children }) => (
     <Box
@@ -116,7 +110,6 @@ export default function MultiStepForm() {
       id="form-historia_button-back"
       onClick={handleBack}
       variant="contained"
-      className={useStyles.button}
       fullWidth
     >
       Voltar
@@ -152,7 +145,7 @@ export default function MultiStepForm() {
     >
       <Stepper activeStep={activeStep}>
         {pages.map((page) => (
-          <Step key={page}>
+          <Step key={page.type}>
             <StepLabel />
           </Step>
         ))}
