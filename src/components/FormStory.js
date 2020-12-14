@@ -23,6 +23,40 @@ import FormAdditionalInformation from './pages/FormAdditionalInformation';
 
 import sendForm from './sendForm';
 
+function PageBox({ children }) {
+  return (
+    <Box
+      flexGrow={1}
+      m={4}
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+    >
+      {children}
+    </Box>
+  );
+}
+PageBox.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+function ButtonBox({ children }) {
+  return (
+    <Box
+      display="flex"
+      justifyContent="space-around"
+      style={{ width: '100%' }}
+      marginBottom={2}
+    >
+      {children}
+    </Box>
+  );
+}
+ButtonBox.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
 export default function FormStory() {
   const [activeStep, setActiveStep] = useState(0);
   const [data, setData] = useState({
@@ -74,36 +108,6 @@ export default function FormStory() {
   ];
 
   const lastPage = <Typography>Todas as etapas concluídas!</Typography>;
-
-  const PageBox = ({ children }) => (
-    <Box
-      flexGrow={1}
-      m={4}
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
-    >
-      {children}
-    </Box>
-  );
-  PageBox.propTypes = {
-    children: PropTypes.node.isRequired,
-  };
-
-  const ButtonBox = ({ children }) => (
-    <Box
-      display="flex"
-      justifyContent="space-around"
-      style={{ width: '100%' }}
-      marginBottom={2}
-    >
-      {children}
-    </Box>
-  );
-  ButtonBox.propTypes = {
-    children: PropTypes.node.isRequired,
-  };
 
   const buttonBack = (
     <Button
