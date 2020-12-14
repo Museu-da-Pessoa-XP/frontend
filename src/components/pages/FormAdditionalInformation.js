@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { TextField, Typography } from '@material-ui/core';
 
@@ -31,5 +32,13 @@ function FormAdditionalInformation({ data, setData }) {
     </>
   );
 }
+
+FormAdditionalInformation.propTypes = {
+  data: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }).isRequired,
+  setData: PropTypes.func.isRequired,
+};
 
 export default FormAdditionalInformation;
