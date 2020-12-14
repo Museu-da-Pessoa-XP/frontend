@@ -20,6 +20,7 @@ import FormPersonalData from './pages/FormPersonalData';
 import FormSelectMediaType from './pages/FormSelectMediaType';
 import FormInsertMedia from './pages/FormInsertMedia';
 import FormAdditionalInformation from './pages/FormAdditionalInformation';
+import FormHowToTellStory from './pages/FormHowToTellStory';
 
 import sendForm from './sendForm';
 
@@ -102,12 +103,21 @@ export default function FormStory() {
   const defaultPropsPage = { setData, data };
   const pages = [
     <FormPersonalData {...defaultPropsPage} />,
+    <FormHowToTellStory />,
     <FormSelectMediaType {...defaultPropsPage} />,
     <FormInsertMedia {...defaultPropsPage} />,
     <FormAdditionalInformation {...defaultPropsPage} />,
   ];
 
-  const lastPage = <Typography>Todas as etapas concluídas!</Typography>;
+  const lastPage = (
+    <Box>
+      <Typography>Todas as etapas foram concluídas!</Typography>
+      <p>
+        Ao clicar em "Enviar História" você será redirecionado para um breve
+        formulário
+      </p>
+    </Box>
+  );
 
   const buttonBack = (
     <Button
