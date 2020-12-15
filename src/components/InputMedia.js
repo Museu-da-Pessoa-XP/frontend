@@ -3,7 +3,7 @@ import React from 'react';
 import { TextField, Button } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
-import VideoRecorder from 'react-video-recorder';
+import RecorderVideo from './RecorderVideo/index';
 
 function InputMedia({ media, setMedia, type }) {
   const handleTextInput = (event) => {
@@ -31,17 +31,7 @@ function InputMedia({ media, setMedia, type }) {
 
   const InputFileMedia = (
     <>
-      <VideoRecorder
-        constraints={{
-          audio: true,
-          video: type === 'video',
-        }}
-        isOnInitially
-        onRecordingComplete={(videoBlob) => {
-          const url = URL.createObjectURL(videoBlob);
-          setMedia(url);
-        }}
-      />
+      <RecorderVideo setMedia={setMedia} type={type} />
       <Button
         id="input-media_upload-media-file"
         variant="contained"
