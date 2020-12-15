@@ -24,6 +24,13 @@ import FormHowToTellStory from './pages/FormHowToTellStory';
 
 import sendForm from './sendForm';
 
+const externalURL =
+  'https://docs.google.com/forms/d/e/1FAIpQLScuJqk1gYRsnL3-XUqGU0sSwETCDIqFCkn7lZ0jfBbNK9Fs0A/viewform';
+
+function redirectToForm() {
+  window.location.assign(externalURL);
+}
+
 function PageBox({ children }) {
   return (
     <Box
@@ -96,6 +103,7 @@ export default function FormStory() {
           ? alertMessages.success
           : alertMessages.fail;
         setAlert(message);
+        redirectToForm();
       })
       .catch(() => setAlert(alertMessages.fail));
   };
@@ -113,8 +121,8 @@ export default function FormStory() {
     <Box>
       <Typography>Todas as etapas foram concluídas!</Typography>
       <p>
-        Ao clicar em "Enviar História" você será redirecionado para um breve
-        formulário
+        Ao clicar em &quot;Enviar História&quot; você será redirecionado para um
+        breve formulário
       </p>
     </Box>
   );
