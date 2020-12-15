@@ -31,7 +31,7 @@ function InputMedia({ media, setMedia, type }) {
 
   const InputFileMedia = (
     <>
-      <RecorderVideo setMedia={setMedia} type={type} />
+      {type === 'video' && <RecorderVideo setMedia={setMedia} type={type} />}
       <Button
         id="input-media_upload-media-file"
         variant="contained"
