@@ -122,7 +122,7 @@ export default function FormStory() {
       <Typography>Todas as etapas foram concluídas!</Typography>
       <p>
         Ao clicar em &quot;Enviar História&quot; você será redirecionado para um
-        breve formulário
+        breve formulário.
       </p>
     </Box>
   );
