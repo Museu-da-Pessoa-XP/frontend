@@ -15,7 +15,7 @@ describe('FormStory', () => {
   describe('when it sends a valid form', () => {
     beforeEach(() => {
       fetch.mockResponseOnce(JSON.stringify({}), { status: 200 });
-      for (let i = 0; i < 4; i += 1) {
+      for (let i = 0; i < 5; i += 1) {
         wrapper.find('#form-historia_button-next').props().onClick();
       }
       wrapper.find('#form-historia_button-submit').props().onClick();
@@ -30,7 +30,7 @@ describe('FormStory', () => {
   describe('when it sends an invalid form', () => {
     beforeEach(() => {
       fetch.mockResponseOnce(JSON.stringify({}), { status: 400 });
-      for (let i = 0; i < 4; i += 1) {
+      for (let i = 0; i < 5; i += 1) {
         wrapper.find('#form-historia_button-next').props().onClick();
       }
       wrapper.find('#form-historia_button-submit').props().onClick();

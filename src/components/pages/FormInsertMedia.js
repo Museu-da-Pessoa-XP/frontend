@@ -13,7 +13,7 @@ function FormInsertMedia({ data, setData }) {
   return (
     <>
       <Typography variant="h6" component="h1">
-        Selecione a sua história
+        Conte a sua história
       </Typography>
       <InputMedia
         media={data.media}
