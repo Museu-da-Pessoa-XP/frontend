@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 
 import RecorderVideo from './RecorderVideo/index';
 
+import RecorderAudio from './RecorderAudio/RecorderAudio';
+
 function InputMedia({ media, setMedia, type }) {
   const handleTextInput = (event) => {
     const textContent = event.target.value;
@@ -32,6 +34,7 @@ function InputMedia({ media, setMedia, type }) {
   const InputFileMedia = (
     <>
       {type === 'video' && <RecorderVideo setMedia={setMedia} type={type} />}
+      {type === 'audio' && <RecorderAudio setMedia={setMedia} />}
       <Button
         id="input-media_upload-media-file"
         variant="contained"
@@ -46,6 +49,8 @@ function InputMedia({ media, setMedia, type }) {
         />
       </Button>
     </>
+
+
   );
 
   return <>{type === 'text' ? InputTextMedia : InputFileMedia}</>;

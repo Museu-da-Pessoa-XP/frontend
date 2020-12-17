@@ -52,8 +52,7 @@ Button.defaultProps = {
 export default (props) => (
   <RecWrapper>
     <Instructions>
-      <div>PRESSIONE O </div>
-      <InstuctionsHighlight> BOTÃO </InstuctionsHighlight>
+      <InstuctionsHighlight> PRESSIONE </InstuctionsHighlight>
       PARA GRAVAR
     </Instructions>
 
