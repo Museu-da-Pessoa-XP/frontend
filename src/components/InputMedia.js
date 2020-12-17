@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 import RecorderVideo from './RecorderVideo/index';
 
-import RecorderAudio from './RecorderAudio';
+import RecorderAudio from './RecorderAudio/RecorderAudio';
 
 function InputMedia({ media, setMedia, type }) {
   const handleTextInput = (event) => {
