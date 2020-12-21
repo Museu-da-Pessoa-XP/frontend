@@ -6,17 +6,21 @@ function FormHowToTellStory() {
   return (
     <>
       <Typography variant="h6" component="h1">
-        Como deve ser feita a história?
+        Mas o que eu devo contar?
       </Typography>
       <p>
-        A sua história deve ter começo, meio e fim! Deve ser uma história
-        baseada em fatos reais sobre a sua vivência ou a vivência de outra
-        pessoa que você esteja descrevendo. <br></br>
-        <br></br>A história não deve conter apenas opiniões, ela deve ser
-        interessante para quem estiver lendo, escutando ou vendo ela!<br></br>
-        <br></br>Lembre-se de ser o mais detalhado possível, quando aconteceu
-        essa história? Onde essa história se passa? Quem são os personagens
-        envolvidos na sua história?
+        O importante é que seja uma história! Com começo, meio e fim. Você pode
+        selecionar um momento específico de sua vida e depois voltar outras
+        vezes para contar outros.
+        <br />
+        <br />
+        Pode, por exemplo, ser a história da origem da sua família, uma história
+        sobre sua infância ou vida atual. Pode até ser a história de uma outra
+        pessoa, como alguém da sua família.
+        <br />
+        <br />
+        Cuidado para não se perder em opiniões e comentários. Pensar no que quer
+        contar, antes de começar, já ajuda bastante!
       </p>
     </>
   );

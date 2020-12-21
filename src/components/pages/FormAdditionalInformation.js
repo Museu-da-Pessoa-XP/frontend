@@ -13,7 +13,7 @@ function FormAdditionalInformation({ data, setData }) {
   return (
     <>
       <Typography variant="h6" component="h1">
-        Conte um pouco sobre a sua história
+        Que título quer dar a ela?
       </Typography>
       <TextField
         id="form-additional-information_input-title"
@@ -25,6 +25,9 @@ function FormAdditionalInformation({ data, setData }) {
         onChange={handleInput((title) => ({ title }))}
       />
 
+      <Typography variant="h6" component="h1">
+        E quais palavras-chave resumem a essência de sua história?
+      </Typography>
       <InputTags
         value={data.tags}
         setValue={(tags) => setData({ ...data, tags })}
