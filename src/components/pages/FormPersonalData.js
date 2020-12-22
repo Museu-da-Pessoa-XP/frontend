@@ -15,7 +15,7 @@ function FormPersonalData({ data, setData }) {
       <img alt="" src={Logo} />
 
       <Typography variant="h6" component="h1">
-        Digite suas informações pessoais
+        Digite suas informações pessoais para começar
       </Typography>
       <TextField
         id="form-historia_input-name"
